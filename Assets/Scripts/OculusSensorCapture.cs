@@ -10,9 +10,8 @@ public class OculusSensorCapture : MonoBehaviour
     private StreamWriter logWriter;
     private bool isLogging = false;
     
-    private (string, string)[] activities = {("STD", "Standing"), ("SIT", "Sitting"),
-        ("JOG", "Jogging"), ("STR", "Arms stretching"), ("CHP", "Arms chopping"), 
-        ("TWS", "Twisting")};
+    private (string, string)[] activities = {("STD", "Get out of bed on feet"), ("SIT", "Sit up in bed"),
+        ("LAY", "Laying on back"), ("ROL", "Roll in bed")};
 
     private int curActivityIdx = 0;
     
