@@ -276,8 +276,8 @@ def summarize_combined(metric: str, name: str):
     summarized_df.to_csv("../Data/jose/files/summarized_files/Summarized_table - " + metric + "_for_" + name + ".csv")
     return summarized_df
 # Function I called to make my graphs in the Writeup:---------------------------
-summarize_combined("Variance", "all")
-summarize_combined("Mean", "all")
+#summarize_combined("Variance", "all")
+#summarize_combined("Mean", "all")
 # ------------------------------------------------------------------------------
 #print(get_filepath("summarized_files/Combined_" + "LAY" + "_for_all"))
 # This function creates graphs and Tables -- Used for Question #6. It finds the 
@@ -286,19 +286,18 @@ def distance_between_controllers():
     all_activities = ["LAY", "ROL", "SIT", "SITtoLAY", "STD"]
     tmp_filenames = []
     for i in all_activities:
-        tmp_filenames.append(get_filepath("summarized_files/Combined_" + i + "_for_all"))
+        tmp_filenames.append(get_filepath("summarized_files/Combined_" + i + "_for_full"))
 
     df1 = pandas.read_csv(tmp_filenames[0], header=0, index_col=False)
     df2 = pandas.read_csv(tmp_filenames[1], header=0, index_col=False)
     df3 = pandas.read_csv(tmp_filenames[2], header=0, index_col=False)
     df4 = pandas.read_csv(tmp_filenames[3], header=0, index_col=False)
     df5 = pandas.read_csv(tmp_filenames[4], header=0, index_col=False)
-    df6 = pandas.read_csv(tmp_filenames[5], header=0, index_col=False)
-    tmp_dfs = [df1, df2, df3, df4, df5, df6]
+    tmp_dfs = [df1, df2, df3, df4, df5]
     
     counter = 0
     new_df = pandas.DataFrame(index=["Pos.x", "Pos.y", "Pos.z"], columns=all_activities)
-    for i in range(0, 6):
+    for i in range(0, 5):
         curr_df = tmp_dfs[i]
         curr_column = all_activities[counter]
         curr_df["Pos.x"] = (curr_df["controller_left_pos.x"] - curr_df["controller_right_pos.x"])
@@ -309,7 +308,7 @@ def distance_between_controllers():
     fig.suptitle("Location Difference of Controllers - Left Controller Minus Right")
     subplot_index_x = 0
     subplot_index_y = 0
-    for i in range(0, 6):
+    for i in range(0, 5):
         curr_data = tmp_dfs[i]
         axs[subplot_index_x, subplot_index_y].plot(curr_data["time"], curr_data["Pos.x"], color='red', label='X dif')
         axs[subplot_index_x, subplot_index_y].plot(curr_data["time"], curr_data["Pos.y"], color='blue', label='Y dif')
@@ -319,13 +318,13 @@ def distance_between_controllers():
         if subplot_index_x > 2:
             subplot_index_x = 0
             subplot_index_y += 1
-    handles, labels = axs[2,1].get_legend_handles_labels()
+    handles, labels = axs[1,1].get_legend_handles_labels()
     fig.legend(handles, labels, loc="upper right")
     fig.set_size_inches(12.5, 8.5)
     plt.show()
     summarized_df_mean = pandas.DataFrame(index=all_activities, columns=["Pos.x", "Pos.y", "Pos.z"])
     summarized_df_variance = pandas.DataFrame(index=all_activities, columns=["Pos.x", "Pos.y", "Pos.z"])
-    for i in range(0, 6):
+    for i in range(0, 5):
         curr_df = tmp_dfs[i]
         summarized_df_mean.loc[all_activities[i], "Pos.x"] = curr_df["Pos.x"].mean()
         summarized_df_mean.loc[all_activities[i], "Pos.y"] = curr_df["Pos.y"].mean()
@@ -344,4 +343,4 @@ def distance_between_controllers():
     
     summarized_df_mean.to_csv(new_file_name_mean)
     summarized_df_variance.to_csv(new_file_name_var)
-# distance_between_controllers()
+distance_between_controllers()
