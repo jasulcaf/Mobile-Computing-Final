@@ -78,11 +78,12 @@ def question_three(activity: str):
     attribute_list = []
     device_list = ["headset", "controller_left", "controller_right"]
     measure_list = ["vel", "angularVel", "pos", "rot"]
+    sample_size = 5
     for name in device_list:
         for measure in measure_list:
             attribute_list.append(name + "_" + measure)
     print(attribute_list)
-    for i in range(1, 6):
+    for i in range(1, sample_size + 1):
         extension_name = "_0" + str(i)
         tmp_activities = []
         tmp_activities.append(activity + extension_name)
@@ -108,7 +109,7 @@ def question_three(activity: str):
                 
                 visualize_sensor_trace(filename, attribute)
 # Example Call -- I could also choose different Activities!!              
-# question_three("STD")
+question_three("LAY")
 
 # This functions takes as input both the Activity (1 of the 6) and a Metric (either 
 # Mean or Variance) and outputs a CSV that has 5 columns (corresponding to the 5
@@ -117,7 +118,8 @@ def question_three(activity: str):
 def print_table_question_three(activity: str, metric: str):
     tmp_activities = []
     counter = 1
-    for i in range(1, 6):
+    sample_size = 5
+    for i in range(1, sample_size + 1):
         extension_name = "_0" + str(i)
         tmp_activities.append(activity + extension_name)
     for i in tmp_activities:
