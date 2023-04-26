@@ -109,7 +109,7 @@ def question_three(activity: str):
                 
                 visualize_sensor_trace(filename, attribute)
 # Example Call -- I could also choose different Activities!!              
-question_three("LAY")
+# question_three("LAY")
 
 # This functions takes as input both the Activity (1 of the 6) and a Metric (either 
 # Mean or Variance) and outputs a CSV that has 5 columns (corresponding to the 5
@@ -150,7 +150,7 @@ def print_table_question_three(activity: str, metric: str):
 # So, to be more precise ---> There are 5 different plots. Each plot contains 6 subplots
 # that corresponds to the 6 different activities
 def visualize_all_attributes(attribute: str):
-    all_activities = ["STD", "SIT", "JOG", "CHP", "STR", "TWS"]
+    all_activities = ["LAY", "ROL", "SIT", "SITtoLAY", "STD"]
     for i in range(1, 6):
         extension_name = "_0" + str(i)
         tmp_activities = []
@@ -190,11 +190,25 @@ def visualize_all_attributes(attribute: str):
 
 # This function takes as input an Activity (one of the 6) and returns a CSV that 
 # combines the 5 different trials of that Activity
-def combine_CSV(activity: str):
+def combine_CSV(activity: str, name: str):
     tmp_activities = []
     tmp_filenames = []
-    for i in range(1, 6):
-        extension_name = "_0" + str(i)
+    if (name == "matt"):
+        lower_bound = 1
+        upper_bound = 6
+    elif name == "jose": 
+        lower_bound = 6
+        upper_bound = 11
+    else: #Means we want a combination of all!!!
+        lower_bound = 1 
+        upper_bound = 11
+        name = "full"
+        
+    for i in range(lower_bound, upper_bound):
+        if i < 10:
+            extension_name = "_0" + str(i)
+        else: 
+            extension_name = "_" + str(i)
         tmp_activities.append(activity + extension_name)
 
     for i in tmp_activities:
@@ -206,7 +220,7 @@ def combine_CSV(activity: str):
     df5 = pandas.read_csv(tmp_filenames[4], header=0, index_col=False)
     
     # In case want to make the actual new CSV and analyze data is correct (Testing Purpose)
-    new_file_name = "../Data/Lab1/Combined_" + activity + ".csv"
+    new_file_name = "../Data/jose/files/summarized_files/Combined_" + activity + "_for_" + name + ".csv"
     
     combined_df = df1.append(df2, ignore_index=True)
     combined_df = combined_df.append(df3, ignore_index=True)
@@ -215,20 +229,27 @@ def combine_CSV(activity: str):
     combined_df.to_csv(new_file_name)
     return combined_df
 # Example Call of how I got all my Combined CSVs:
-# combine_CSV("JOG")
+#combine_CSV("LAY", "matt")
 # Keep in mind I ended up calling for all the different Activites, not just 1!!!
 
 # This function takes in a Metric (which is either Mean or Variance) and returns
 # the summarized table for ALL DATA regarding ALL Activities - Used in Question #5
-def summarize_combined(metric: str):
-    all_activities = ["STD", "SIT", "JOG", "CHP", "STR", "TWS"]
+def summarize_combined(metric: str, name: str):
+    if (name != "matt") and (name != "jose"):
+        name = "all"
+    all_activities = ["LAY", "ROL", "SIT", "SITtoLAY", "STD"]
     combined_dfs = []
     for i in all_activities:
-        combined_dfs.append(combine_CSV(i))
+        combined_dfs.append(combine_CSV(i, name))
 
     column_names = []
-    attribute_names = ["headset_rot", "headset_pos", "controller_left_rot", "controller_right_rot"]
-    for i in attribute_names:
+    attribute_list = []
+    device_list = ["headset", "controller_left", "controller_right"]
+    measure_list = ["vel", "angularVel", "pos", "rot"]
+    for cur_name in device_list:
+        for measure in measure_list:
+            attribute_list.append(cur_name + "_" + measure)
+    for i in attribute_list:
         x_version = i + ".x"
         y_version = i + ".y"
         z_version = i + ".z"
@@ -252,20 +273,20 @@ def summarize_combined(metric: str):
     for i in all_activities:
         summarized_df[i] = summarized_df[i].apply(lambda x: round(x, decimals))
     summarized_df.round(4)
-    summarized_df.to_csv("../Data/Lab1/Summarized_table - " + metric + ".csv")
+    summarized_df.to_csv("../Data/jose/files/summarized_files/Summarized_table - " + metric + "_for_" + name + ".csv")
     return summarized_df
 # Function I called to make my graphs in the Writeup:---------------------------
-# summarize_combined("Variance")
-# summarize_combined("Mean")
+summarize_combined("Variance", "all")
+summarize_combined("Mean", "all")
 # ------------------------------------------------------------------------------
-
+#print(get_filepath("summarized_files/Combined_" + "LAY" + "_for_all"))
 # This function creates graphs and Tables -- Used for Question #6. It finds the 
 # distance between the two controllers (Right and Left) at any point in time
 def distance_between_controllers():
-    all_activities = ["STD", "SIT", "JOG", "CHP", "STR", "TWS"]
+    all_activities = ["LAY", "ROL", "SIT", "SITtoLAY", "STD"]
     tmp_filenames = []
     for i in all_activities:
-        tmp_filenames.append(get_filepath("Combined_" + i))
+        tmp_filenames.append(get_filepath("summarized_files/Combined_" + i + "_for_all"))
 
     df1 = pandas.read_csv(tmp_filenames[0], header=0, index_col=False)
     df2 = pandas.read_csv(tmp_filenames[1], header=0, index_col=False)
@@ -313,8 +334,8 @@ def distance_between_controllers():
         summarized_df_variance.loc[all_activities[i], "Pos.x"] = curr_df["Pos.x"].var()
         summarized_df_variance.loc[all_activities[i], "Pos.y"] = curr_df["Pos.y"].var()
         summarized_df_variance.loc[all_activities[i], "Pos.z"] = curr_df["Pos.z"].var()
-    new_file_name_mean = "../Data/Lab1/Difference_in_position - Mean.csv"
-    new_file_name_var = "../Data/Lab1/Difference_in_position - Variance.csv"
+    new_file_name_mean = "../Data/jose/files/summarized_files/Difference_in_position - Mean.csv"
+    new_file_name_var = "../Data/jose/files/summarized_files/Difference_in_position - Variance.csv"
     
     decimals = 4
     for i in ["Pos.x", "Pos.y", "Pos.z"]:
