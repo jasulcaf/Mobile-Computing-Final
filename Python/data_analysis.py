@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 #   csv_file: A string that has the name of CSV of interest
 # Output: filepath to the specified csv_file
 def get_filepath(csv_file: str):
-    relative_path = "Data/Lab1/" + csv_file + ".csv"
+    relative_path = "Data/jose/files/" + csv_file + ".csv"
     # print(relative_path)
     # files = glob.glob("../Data/Lab1/*.csv", recursive=True)
     # print(files)
@@ -28,7 +28,7 @@ def summarize_sensor_trace(csv_file: str):
     df = pandas.read_csv(filename, header=0, index_col=False)
     
     # In case want to make the actual new CSV and analyze data is correct (Testing Purpose)
-    # new_file_name = csv_file + ".csv"
+    new_file_name = csv_file + ".csv"
     column_names = df.columns.values.tolist()[1:]
     print(column_names)
     means_variances = ["Mean", "Variance"]
@@ -42,11 +42,11 @@ def summarize_sensor_trace(csv_file: str):
         new_df.loc[i, 'Mean'] = curr_mean
         new_df.loc[i, 'Variance'] = curr_var
 
-    # new_df.to_csv(new_file_name)
+    new_df.to_csv(new_file_name)
     return new_df
 
 # ----------------------- Testing function with a CSV --------------------------
-# summarize_sensor_trace("JOG_02")
+summarize_sensor_trace("LAY_01")
 # ---------------------------- End of testing ----------------------------------
 
 def visualize_sensor_trace(csv_file: str, attribute: str):
