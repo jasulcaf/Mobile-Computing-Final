@@ -151,8 +151,11 @@ def print_table_question_three(activity: str, metric: str):
 # that corresponds to the 6 different activities
 def visualize_all_attributes(attribute: str):
     all_activities = ["LAY", "ROL", "SIT", "SITtoLAY", "STD"]
-    for i in range(1, 6):
-        extension_name = "_0" + str(i)
+    for i in range(1, 11):
+        if i < 10:
+            extension_name = "_0" + str(i)
+        else: 
+            extension_name = "_" + str(i)
         tmp_activities = []
         for name in all_activities:
             tmp_activities.append(name + extension_name)
@@ -180,11 +183,11 @@ def visualize_all_attributes(attribute: str):
             if subplot_index_x > 2:
                 subplot_index_x = 0
                 subplot_index_y += 1
-        handles, labels = axs[2,1].get_legend_handles_labels()
+        handles, labels = axs[1,1].get_legend_handles_labels()
         fig.legend(handles, labels, loc="upper right")
         fig.set_size_inches(12.5, 8.5)
         plt.show()
-# visualize_all_attributes("headset_pos") # Help Differentiate SIT
+visualize_all_attributes("headset_angularVel") # Help Differentiate SIT
 # visualize_all_attributes("controller_left_rot") # Help Differentiate TWS & JOG
 # visualize_all_attributes("headset_rot") # Help Differentiate CHP & STR
 
@@ -343,4 +346,4 @@ def distance_between_controllers():
     
     summarized_df_mean.to_csv(new_file_name_mean)
     summarized_df_variance.to_csv(new_file_name_var)
-distance_between_controllers()
+# distance_between_controllers()
