@@ -24,19 +24,35 @@ def predict_shallow(sensor_data: str) -> str:
     helper functions as needed.
     """
     # Load saved model 
-    clf = joblib.load('Python/model_weights.joblib')
-
-    # # Load testing data into dataframe
+    #clf = joblib.load('Python/model_weights.joblib')
+    clf_hgbc = joblib.load('Python/model_weights_hgbc.joblib')
+    clf_rfc = joblib.load('Python/model_weights_rfc.joblib')
+    # Load testing data into dataframe
     test_data = pd.read_csv(sensor_data, usecols=range(37))
     
-    # # Generate predictions using trained model
-    predictions = clf.predict(test_data)
-    c = Counter(predictions)
+    # Generate predictions using trained model
+    predictions_hgbc = clf_hgbc.predict(test_data)
+    c_hgbc = Counter(predictions_hgbc)
+
+    predictions_rfc = clf_rfc.predict(test_data)
+    c_rfc = Counter(predictions_rfc)
 
     # extract the three digit number from the input file name
     file_number = sensor_data.split("_")[1].split(".")[0]
 
-    return c.most_common()[0][0]
+    print(sensor_data[-9:])
+    print('HGBC')
+    print(c_hgbc)
+    print("====")
+    print('RFC')
+    print(c_rfc)
+    print("====")
+    print(" ")
+
+    results = [c_hgbc.most_common()[0][0], c_rfc.most_common()[0][0]]
+    results_string = ' '.join(results)
+    return results_string
+
 
 # predict_shallow('Data/Lab2/Test/test_001.csv')
 
