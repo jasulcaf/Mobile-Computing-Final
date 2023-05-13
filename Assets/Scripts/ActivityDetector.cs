@@ -4,10 +4,13 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 using System.Text;
+using System.Diagnostics;
+using System.ComponentModel;
+using System.Reflection;
 
 public class ActivityDetector : MonoBehaviour
 {
-    private Material wallColor;
+    public Material wallColor;
 
     // public GameObject Wall1;
     // public GameObject Wall2;
@@ -23,7 +26,7 @@ public class ActivityDetector : MonoBehaviour
     private readonly double LIGHT_ON_THRESHOLD = .75;
     private readonly double LIGHT_OFF_DECAY = .9;
     private readonly double LIGHT_ON_GROWTH = 1.1;
-    private readonly double WINDOW_LENGTH = 5; // 5 seconds
+    private readonly int WINDOW_LENGTH = 5; // 5 seconds
     private string PYFILE_PATH = "";
 
     OculusSensorReader sensorReader;
@@ -66,26 +69,37 @@ public class ActivityDetector : MonoBehaviour
             File.Delete(path);
         }
 
+        string[] dimensions = {".x", ".y", ".z"};
         // Now create the csv file manually
-        using (FileStream fs = File.Create(path))
-        {
-            foreach (var attributes in attributes_list)
+        using (StreamWriter writer = new StreamWriter(path))
+        {   
+            bool first_iter = true;
+            foreach (var attributez in attributes_list)
             {
-                if (attributes_list.First() == item)
+                if (first_iter)
                 {
-                    foreach (KeyValuePair<string, string> feature in attributes)
+                    first_iter = false;
+                    foreach (KeyValuePair<string, Vector3> feature in attributez)
                     {
-                        AddText(fs, feature.Item1);
-                        AddText(fs, ",");
+                        foreach (string dimension in dimensions)
+                        {
+                            writer.Write(feature.Key + dimension);
+                            writer.Write(",");
+                        }
                     }
-                    AddText(fs, "\n");
+                    writer.Write("\n");
                 }
-                foreach (KeyValuePair<string, string> feature in attributes)
+                foreach (KeyValuePair<string, Vector3> feature in attributez)
                 {
-                    AddText(fs, feature.Item2);
-                    AddText(fs, ",");
+                    Vector3 vec = feature.Value;
+                    writer.Write(vec.x);
+                    writer.Write(",");
+                    writer.Write(vec.y);
+                    writer.Write(",");
+                    writer.Write(vec.z);
+                    writer.Write(",");
                 }
-                AddText(fs, "\n");
+                writer.Write("\n");
             }
         }
         // Call the python script xD
@@ -126,8 +140,8 @@ public class ActivityDetector : MonoBehaviour
     // Update is called once per frame
     void updateWallColor(Color currColor)
     {
-        double currRGB = currColor.r;
-        double newRGB = 0;
+        float currRGB = currColor.r;
+        float newRGB = 0;
         if(isSleeping && currRGB > 0)
         {
             // Turn lights off gradually
@@ -137,17 +151,18 @@ public class ActivityDetector : MonoBehaviour
             }
             else
             {
-                newRGB = currRGB * LIGHT_OFF_DECAY;
+                newRGB = currRGB * ((float) LIGHT_OFF_DECAY);
             }
         }
         else if(!isSleeping && currRGB < LIGHT_ON_THRESHOLD)
         {
             // Turn lights on gradually
-            newRGB = min(LIGHT_ON_THRESHOLD, currRGB * LIGHT_ON_GROWTH);
+            newRGB = (float) Math.Min(LIGHT_ON_THRESHOLD, currRGB * LIGHT_ON_GROWTH);
         }
 
         // Now update the material
-        wallColor.SetColor(newRGB, newRGB, newRGB, 1);
+        Color NewColor = new Color(newRGB, newRGB, newRGB, 1);
+        wallColor.SetColor("_Color", NewColor);
     }
     void Update()
     {
@@ -155,7 +170,7 @@ public class ActivityDetector : MonoBehaviour
         bool aButtonPressed = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch);
         bool frontRTriggerPressed = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
         bool frontLTriggerPressed = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
-        Color currColor = Material.GetColor("_Color");
+        Color currColor = wallColor.GetColor("_Color");
 
         // triggers
         if (aButtonPressed)
