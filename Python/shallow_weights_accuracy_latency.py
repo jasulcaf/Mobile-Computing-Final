@@ -7,61 +7,59 @@ from glob import glob
 from sklearn.metrics import precision_score
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import HistGradientBoostingClassifier
-#from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 def get_model_weights():
     df = pd.DataFrame()
     y = []
-    for filename in os.listdir('../Data/Lab2/Train'):
+    for filename in os.listdir('../Data/jose/files'):
         if filename[-4:] == '.csv':
-            df_cur = pd.read_csv(f'../Data/Lab2/Train/{filename}', usecols=range(37)) 
+            df_cur = pd.read_csv(f'../Data/jose/files/{filename}', usecols=range(37)) 
             
             df = df.append(df_cur)
-            y_cur = [filename[0:3]] * len(df_cur.index)
+            y_cur = [filename.split('_')[0]] * len(df_cur.index)
             y.extend(y_cur)
     X_train, X_val, y_train, y_val = train_test_split(df, y, test_size=0.2)
 
     # Train model on training set
     clf_hgbc = HistGradientBoostingClassifier()
     clf_hgbc.fit(X_train, y_train)
-    #clf_rfc = RandomForestClassifier()
-    #clf_rfc.fit(X_train, y_train)
+    clf_rfc = RandomForestClassifier()
+    clf_rfc.fit(X_train, y_train)
 
     # Evaluate model on validation set
     score_hgbc = clf_hgbc.score(X_val, y_val)
-    #score_rfc = clf_rfc.score(X_val, y_val)
+    score_rfc = clf_rfc.score(X_val, y_val)
     print(f'Validation set score for all activities using HGBC: {score_hgbc}')
-    #print(f'Validation set score for all activities using RFC: {score_rfc}')
+    print(f'Validation set score for all activities using RFC: {score_rfc}')
 
     # Retrain model on full training set
     clf_hgbc.fit(df, y)
-    #clf_rfc.fit(df, y)
+    clf_rfc.fit(df, y)
  
     # Save model and preprocessing objects to file
-    joblib.dump(clf_hgbc, 'model_weights.joblib')
+    joblib.dump(clf_hgbc, 'model_weights_hgbc.joblib')
+    joblib.dump(clf_rfc, 'model_weights_rfc.joblib')
 
-# df = pd.DataFrame()
-# df_cur = pd.read_csv(f'../Data/Lab2/Train/CHP_001.csv', usecols=range(37))
-# df = df.append(df_cur)
-# print(df)
 
 # Get accuracy and latency
 def accuracy_latency():
     activity_precisions = []
     activity_latencies = []
-    activities = ["STD", "SIT", "JOG", "CHP", "STR", "TWS"] 
+    activities = ["LAY", "ROL", "SIT", "SITtoLAY", "STD"] 
     for activity in activities:
         df = pd.DataFrame()
         y = []
-        for file in glob(f'../Data/Lab2/Validation/{activity}*'):
-            df_cur = pd.read_csv(file) #.iloc[:, :-1]
+        for file in glob(f'../Data/jose/files/{activity}*'):
+            df_cur = pd.read_csv(file, usecols=range(37)) 
             df = df.append(df_cur)
             y_cur = [activity] * len(df_cur.index)
             y.extend(y_cur)
         X_train, X_val, y_train, y_val = train_test_split(df, y, test_size=0.2)
 
         # Classifier type
-        clf = HistGradientBoostingClassifier()
+        #clf = HistGradientBoostingClassifier()
+        clf = RandomForestClassifier()
 
         # Train model on training set
         # Start timer for training latency
@@ -89,7 +87,7 @@ def accuracy_latency():
     print(f'\nAverage validation set precision score: {avg_precision:.4f}, average latency: {avg_latency:.6f}s')
 
 
-#get_model_weights()
+get_model_weights()
 
 #Uncomment below line to get accuracy and latency values
 accuracy_latency()
