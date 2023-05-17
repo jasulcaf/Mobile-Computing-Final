@@ -7,6 +7,7 @@ using System.Text;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Reflection;
+using UnityEngine;
 
 public class ActivityDetector : MonoBehaviour
 {
@@ -20,14 +21,26 @@ public class ActivityDetector : MonoBehaviour
 
     public AudioSource alarm;
     public AudioClip clip;
+    public GameObject Activity_Sign;
+    public GameObject Infos;
 
     // Global Vars
+    // Light vars
     private readonly double LIGHT_OFF_THRESHOLD = .05;
     private readonly double LIGHT_ON_THRESHOLD = .75;
-    private readonly double LIGHT_OFF_DECAY = .9;
-    private readonly double LIGHT_ON_GROWTH = 1.1;
+    private readonly double LIGHT_OFF_DECAY = .99;
+    private readonly double LIGHT_ON_GROWTH = 1.01;
+    // recording vars
     private readonly int WINDOW_LENGTH = 5; // 5 seconds
-    private string PYFILE_PATH = "";
+    private bool readyToDetect = false;
+    private float timeRemaining = 0;
+    private bool timerActive = false;
+    // other
+    private string CURRDIRPATH = "";
+    // private string PARENTDIRPATH = "";
+    private string EXEFILE_PATH = "";
+    private float currRGB = 0;
+    List<string> detected_list = new List<string>();
 
     OculusSensorReader sensorReader;
     
@@ -40,8 +53,17 @@ public class ActivityDetector : MonoBehaviour
     
     string GetCurrentActivity(Dictionary<string, Vector3> attributes)
     {
+        if (!readyToDetect)
+        {
+            if (attributes_list.Count > 0)
+            {
+                attributes_list.Clear();
+            }
+            return "---";
+        }
         // Store in attributes_list regardless of what we are about to do
         attributes_list.Add(attributes);
+        // UnityEngine.Debug.Log("this0");
         if (framesReceived < NUM_HZ * WINDOW_LENGTH) // first three seconds of data
         {
             // Not ready to do our analysis. Return Unknown ("---")
@@ -62,7 +84,7 @@ public class ActivityDetector : MonoBehaviour
         // We are ready to analyze the previous 3 seconds of data
 
         // write to csv so the python file can reference it
-        string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "curr_data.csv";
+        string path = CURRDIRPATH + "/Assets/Resources/curr_data.csv";
         // Delete the file if exists
         if (File.Exists(path))
         {
@@ -104,8 +126,9 @@ public class ActivityDetector : MonoBehaviour
         }
         // Call the python script xD
         string detected_activity = "";
+        // UnityEngine.Debug.Log("Starting python process!");
         ProcessStartInfo start = new ProcessStartInfo();
-        start.FileName = PYFILE_PATH;
+        start.FileName = EXEFILE_PATH; 
         start.UseShellExecute = false;
         start.RedirectStandardOutput = true;
         using(Process process = Process.Start(start))
@@ -113,9 +136,10 @@ public class ActivityDetector : MonoBehaviour
             using(StreamReader reader = process.StandardOutput)
             {
                 detected_activity = reader.ReadToEnd();
-            }
+            } 
         }
-
+        // UnityEngine.Debug.Log("Detected Activity:");
+        // UnityEngine.Debug.Log(detected_activity);
         // We've got some cleaning up to do
         attributes_list.RemoveRange(0, Math.Max(NUM_HZ, attributes_list.Count - (NUM_HZ * (WINDOW_LENGTH - 1))));
         prevActivity = detected_activity;
@@ -126,10 +150,22 @@ public class ActivityDetector : MonoBehaviour
     void Start()
     {
         sensorReader = new OculusSensorReader();
-        string CURRDIRPATH =  Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        PYFILE_PATH = CURRDIRPATH.Substring(CURRDIRPATH.Length-7) + "Python/predict_continuous.py";
+        CURRDIRPATH =  Directory.GetCurrentDirectory();
+        // CURRDIRPATH = "TEST";
+        // CURRDIRPATH = "TESTING";
+        // UnityEngine.Debug.Log("CURRDIRPATH:");
+        // UnityEngine.Debug.Log(CURRDIRPATH);
+        // PARENTDIRPATH = Directory.GetParent(CURRDIRPATH).ToString();
+        // UnityEngine.Debug.Log("PARENTDIRPATH:");
+        // UnityEngine.Debug.Log(PARENTDIRPATH);
+        EXEFILE_PATH = CURRDIRPATH + "/Assets/Python/dist/predict_continuous/predict_continuous";
+        // UnityEngine.Debug.Log("EXEFILE_PATH:");
+        // UnityEngine.Debug.Log(EXEFILE_PATH);
+
+        Color CurrColor = wallColor.GetColor("_Color");
+        currRGB = CurrColor.r;
     }
-    // void StartSleeping(Color CurrColor)
+    // void StartSleeping(Color CurrColor
     // {
     //     wallColor
     // }
@@ -138,31 +174,43 @@ public class ActivityDetector : MonoBehaviour
         
     // }
     // Update is called once per frame
-    void updateWallColor(Color currColor)
+    void updateWallColor()
     {
-        float currRGB = currColor.r;
         float newRGB = 0;
+        float newTextRGB = 0;
+        bool updateNeeded = false;
         if(isSleeping && currRGB > 0)
         {
             // Turn lights off gradually
             if(currRGB < LIGHT_OFF_THRESHOLD)
             {
                 newRGB = 0;
+                newTextRGB = 1;
             }
             else
             {
                 newRGB = currRGB * ((float) LIGHT_OFF_DECAY);
+                newTextRGB = (float) LIGHT_ON_THRESHOLD - newRGB;
             }
+            updateNeeded = true;
         }
         else if(!isSleeping && currRGB < LIGHT_ON_THRESHOLD)
         {
             // Turn lights on gradually
-            newRGB = (float) Math.Min(LIGHT_ON_THRESHOLD, currRGB * LIGHT_ON_GROWTH);
-        }
 
-        // Now update the material
-        Color NewColor = new Color(newRGB, newRGB, newRGB, 1);
-        wallColor.SetColor("_Color", NewColor);
+            newRGB = (float) Math.Min(LIGHT_ON_THRESHOLD, (float) (Math.Max(LIGHT_OFF_THRESHOLD, currRGB)) * LIGHT_ON_GROWTH);
+            newTextRGB = (float) LIGHT_ON_THRESHOLD - newRGB;
+            updateNeeded = true;
+        }
+        if (updateNeeded){
+            // Now update the material
+            Color NewColor = new Color(newRGB, newRGB, newRGB, 1);
+            Color NewTextColor = new Color(newTextRGB, newTextRGB, newTextRGB, 1);
+            wallColor.SetColor("_Color", NewColor);
+            Activity_Sign.GetComponent<TextMesh>().color = NewTextColor;
+            Infos.GetComponent<TextMesh>().color = NewTextColor;
+            currRGB = newRGB;
+        }
     }
     void Update()
     {
@@ -170,33 +218,64 @@ public class ActivityDetector : MonoBehaviour
         bool aButtonPressed = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch);
         bool frontRTriggerPressed = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
         bool frontLTriggerPressed = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+        bool xButtonPressed = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch);
+        bool yButtonPressed = OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.LTouch);
+        bool keyboardXPress = Input.GetKeyUp(KeyCode.X); 
         Color currColor = wallColor.GetColor("_Color");
 
         // triggers
-        if (aButtonPressed)
+        if (aButtonPressed | keyboardXPress) // toggle sleeping
+        // if (aButtonPressed)
         {
+            // UnityEngine.Debug.Log("Toggling sleep");
             isSleeping = !isSleeping;
+            readyToDetect = isSleeping;
         }
-        if (frontRTriggerPressed)
+        if (frontRTriggerPressed) // play alarm instantly
         {
+            // UnityEngine.Debug.Log("Playing alarm instantly");
             alarm.PlayOneShot(clip);
         }
-        if (frontLTriggerPressed)
+        if (frontLTriggerPressed) // turn off alarm
         {   
+            // UnityEngine.Debug.Log("Turning off alarm; canceling alarm queues");
             alarm.Stop();
+            timerActive = false;
         }
+        // if (xButtonPressed) // alarm in 1 minute
+        // {
+        //     UnityEngine.Debug.Log("Alarm in 1 minute");
+        //     timerActive = true;
+        //     timeRemaining = 60.0f;
+        // }
+        // if (yButtonPressed) // alarm in 5 minutes
+        // {
+        //     UnityEngine.Debug.Log("Alarm in 5 minutes");
+        //     timerActive = true;
+        //     timeRemaining = 300.0f;
+        // }
+        
+        // if (timerActive)
+        // {
+        //     timeRemaining -= Time.deltaTime;
+        //     if (timeRemaining <= 0.0f)
+        //     {
+        //         alarm.PlayOneShot(clip);
+        //         timerActive = false;
+        //     }
+        // }
 
-        updateWallColor(currColor);
+        updateWallColor();
+        
 
         // Fetch attributes as a dictionary, with <device>_<measure> as a key
         // and Vector3 objects as values
-        var attributes = sensorReader.GetSensorReadings();
+        // var attributes = sensorReader.GetSensorReadings();
+        // prob start new thread here
 
-        var currentActivity = GetCurrentActivity(attributes);
-
-        
+        // var currentActivity = GetCurrentActivity(attributes);
 
         // Update the Activity Sign text based on the detected activity
-        // Activity_Sign.GetComponent<TextMesh>().text = currentActivity;
+        Activity_Sign.GetComponent<TextMesh>().text = CURRDIRPATH;
     }
 }
