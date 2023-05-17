@@ -23,10 +23,23 @@ def predict_shallow(sensor_data: str) -> str:
     of your shallow classifier for the given sample. Feel free to load any files and write
     helper functions as needed.
     """
-    # Load saved model 
-    #clf = joblib.load('Python/model_weights.joblib')
-    clf_hgbc = joblib.load('Python/model_weights_hgbc.joblib')
-    clf_rfc = joblib.load('Python/model_weights_rfc.joblib')
+    
+    # Load saved models
+
+    #For both hand_leg and leg data
+    #clf_hgbc = joblib.load('Python/model_weights_hgbc_both_headset_left_cont_right_cont.joblib')
+    #clf_rfc = joblib.load('Python/model_weights_rfc_both_headset_left_cont_right_cont.joblib')
+
+    #For hand_leg data
+    #python3 Python/predict_shallow.py --label_folder Data/Hand_Leg_Test --output output_labels.txt
+    clf_hgbc = joblib.load('Python/model_weights_hgbc_hl_headset_left_cont_right_cont.joblib')
+    clf_rfc = joblib.load('Python/model_weights_rfc_hl_headset_left_cont_right_cont.joblib')
+
+    #For legs data
+    #clf_hgbc = joblib.load('Python/model_weights_hgbc_legs_headset_left_cont_right_cont.joblib')
+    #clf_rfc = joblib.load('Python/model_weights_rfc_legs_headset_left_cont_right_cont.joblib')
+
+
     # Load testing data into dataframe
     test_data = pd.read_csv(sensor_data, usecols=range(37))
     
@@ -38,9 +51,10 @@ def predict_shallow(sensor_data: str) -> str:
     c_rfc = Counter(predictions_rfc)
 
     # extract the three digit number from the input file name
-    file_number = sensor_data.split("_")[1].split(".")[0]
+    file_name = sensor_data.split("_")[0] #[1].split(".")[0]
+  
 
-    print(sensor_data[-9:])
+    print(file_name)
     print('HGBC')
     print(c_hgbc)
     print("====")
@@ -53,8 +67,6 @@ def predict_shallow(sensor_data: str) -> str:
     results_string = ' '.join(results)
     return results_string
 
-
-# predict_shallow('Data/Lab2/Test/test_001.csv')
 
 def predict_shallow_folder(data_folder: str, output: str):
     """Run the model's prediction on all the sensor data in data_folder, writing labels
