@@ -41,6 +41,7 @@ public class ActivityDetector : MonoBehaviour
     private string EXEFILE_PATH = "";
     private float currRGB = 0;
     List<string> detected_list = new List<string>();
+    private string temp123= "";
 
     OculusSensorReader sensorReader;
     
@@ -82,7 +83,6 @@ public class ActivityDetector : MonoBehaviour
         framesReceived ++;
 
         // We are ready to analyze the previous 3 seconds of data
-
         // write to csv so the python file can reference it
         string path = CURRDIRPATH + "/Assets/Resources/curr_data.csv";
         // Delete the file if exists
@@ -93,36 +93,45 @@ public class ActivityDetector : MonoBehaviour
 
         string[] dimensions = {".x", ".y", ".z"};
         // Now create the csv file manually
-        using (StreamWriter writer = new StreamWriter(path))
-        {   
-            bool first_iter = true;
-            foreach (var attributez in attributes_list)
-            {
-                if (first_iter)
+        // temp123 = "ahere";
+        try{
+            using (StreamWriter writer = new StreamWriter(path))
+            {   
+                // temp123 = "bhere";
+                bool first_iter = true;
+                foreach (var attributez in attributes_list)
                 {
-                    first_iter = false;
+                    if (first_iter)
+                    {
+                        first_iter = false;
+                        foreach (KeyValuePair<string, Vector3> feature in attributez)
+                        {
+                            foreach (string dimension in dimensions)
+                            {
+                                writer.Write(feature.Key + dimension);
+                                writer.Write(",");
+                            }
+                        }
+                        writer.Write("\n");
+                    }
                     foreach (KeyValuePair<string, Vector3> feature in attributez)
                     {
-                        foreach (string dimension in dimensions)
-                        {
-                            writer.Write(feature.Key + dimension);
-                            writer.Write(",");
-                        }
+                        Vector3 vec = feature.Value;
+                        writer.Write(vec.x);
+                        writer.Write(",");
+                        writer.Write(vec.y);
+                        writer.Write(",");
+                        writer.Write(vec.z);
+                        writer.Write(",");
                     }
                     writer.Write("\n");
                 }
-                foreach (KeyValuePair<string, Vector3> feature in attributez)
-                {
-                    Vector3 vec = feature.Value;
-                    writer.Write(vec.x);
-                    writer.Write(",");
-                    writer.Write(vec.y);
-                    writer.Write(",");
-                    writer.Write(vec.z);
-                    writer.Write(",");
-                }
-                writer.Write("\n");
             }
+        }
+        catch (Exception e)
+        {
+            // temp123 = e.Message;
+            return "FAIL";
         }
         // Call the python script xD
         string detected_activity = "";
@@ -150,7 +159,8 @@ public class ActivityDetector : MonoBehaviour
     void Start()
     {
         sensorReader = new OculusSensorReader();
-        CURRDIRPATH =  Directory.GetCurrentDirectory();
+        CURRDIRPATH = Directory.GetCurrentDirectory();
+        // /data/app/ (RANDOM LETTERS) / com.uchicago.mclabs-(randomletters) / base.apk/assets/bin/Data/Managed
         // CURRDIRPATH = "TEST";
         // CURRDIRPATH = "TESTING";
         // UnityEngine.Debug.Log("CURRDIRPATH:");
@@ -158,7 +168,7 @@ public class ActivityDetector : MonoBehaviour
         // PARENTDIRPATH = Directory.GetParent(CURRDIRPATH).ToString();
         // UnityEngine.Debug.Log("PARENTDIRPATH:");
         // UnityEngine.Debug.Log(PARENTDIRPATH);
-        EXEFILE_PATH = CURRDIRPATH + "/Assets/Python/dist/predict_continuous/predict_continuous";
+        EXEFILE_PATH = CURRDIRPATH + "/Assets/Python/dist/testing_stuff";
         // UnityEngine.Debug.Log("EXEFILE_PATH:");
         // UnityEngine.Debug.Log(EXEFILE_PATH);
 
@@ -225,7 +235,6 @@ public class ActivityDetector : MonoBehaviour
 
         // triggers
         if (aButtonPressed | keyboardXPress) // toggle sleeping
-        // if (aButtonPressed)
         {
             // UnityEngine.Debug.Log("Toggling sleep");
             isSleeping = !isSleeping;
@@ -242,40 +251,54 @@ public class ActivityDetector : MonoBehaviour
             alarm.Stop();
             timerActive = false;
         }
-        // if (xButtonPressed) // alarm in 1 minute
-        // {
-        //     UnityEngine.Debug.Log("Alarm in 1 minute");
-        //     timerActive = true;
-        //     timeRemaining = 60.0f;
-        // }
-        // if (yButtonPressed) // alarm in 5 minutes
-        // {
-        //     UnityEngine.Debug.Log("Alarm in 5 minutes");
-        //     timerActive = true;
-        //     timeRemaining = 300.0f;
-        // }
+        if (xButtonPressed) // alarm in 1 minute
+        {
+            UnityEngine.Debug.Log("Alarm in 1 minute");
+            timerActive = true;
+            timeRemaining = 60.0f;
+        }
+        if (yButtonPressed) // alarm in 5 minutes
+        {
+            UnityEngine.Debug.Log("Alarm in 5 minutes");
+            timerActive = true;
+            timeRemaining = 300.0f;
+        }
         
-        // if (timerActive)
-        // {
-        //     timeRemaining -= Time.deltaTime;
-        //     if (timeRemaining <= 0.0f)
-        //     {
-        //         alarm.PlayOneShot(clip);
-        //         timerActive = false;
-        //     }
-        // }
+        if (timerActive)
+        {
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining <= 0.0f)
+            {
+                alarm.PlayOneShot(clip);
+                timerActive = false;
+            }
+        }
 
         updateWallColor();
         
 
         // Fetch attributes as a dictionary, with <device>_<measure> as a key
         // and Vector3 objects as values
-        // var attributes = sensorReader.GetSensorReadings();
+        var attributes = sensorReader.GetSensorReadings();
         // prob start new thread here
 
-        // var currentActivity = GetCurrentActivity(attributes);
-
-        // Update the Activity Sign text based on the detected activity
-        Activity_Sign.GetComponent<TextMesh>().text = CURRDIRPATH;
+        var currentActivity = GetCurrentActivity(attributes);
+        try{
+            string[] filess = Directory.GetDirectories(CURRDIRPATH, "*", SearchOption.AllDirectories);
+            temp123 = "the directories:\n";
+            foreach (string filezz in filess)
+            {
+                temp123 += filezz;
+                temp123 += "\n";
+            }
+            
+            // Update the Activity Sign text based on the detected activity
+            
+        }
+        catch (Exception e)
+        {
+            temp123 = CURRDIRPATH + " " + e.Message;
+        }
+        Activity_Sign.GetComponent<TextMesh>().text = temp123;
     }
 }

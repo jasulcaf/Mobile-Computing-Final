@@ -891,13 +891,13 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 50
+  m_FontSize: 30
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
 --- !u!23 &1283136670
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallColor: {fileID: 2100000, guid: e7c3b274ad9cf4d7dae05ea8b6bc7f83, type: 2}
   alarm: {fileID: 1509677037}
-  clip: {fileID: 8300000, guid: 828a73ae5c6644090ab535631dff130d, type: 3}
+  clip: {fileID: 8300000, guid: 8453bb03bc4124d0a8e4e468cbf20880, type: 3}
   Activity_Sign: {fileID: 1283136667}
   Infos: {fileID: 1592379829}
 --- !u!82 &1509677037
@@ -1141,7 +1141,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 828a73ae5c6644090ab535631dff130d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8453bb03bc4124d0a8e4e468cbf20880, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

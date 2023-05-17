@@ -12,7 +12,7 @@ from pathlib import Path
 
 if __name__ == "__main__":
     try: # PATH STUFF
-        dir_path = Path("/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Assets/Python")
+        dir_path = Path("/Assets/Python")
         # dir_path = Path("Android/Data/com.uchicago.mobilecomputinglabs")
         parent_path = dir_path.parent.absolute()
         csv_path = str(parent_path) + "/Resources/curr_data.csv"
