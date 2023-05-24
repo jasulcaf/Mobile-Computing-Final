@@ -261,7 +261,7 @@ public class ActivityDetector : MonoBehaviour
         // PARENTDIRPATH = Directory.GetParent(CURRDIRPATH).ToString();
         // UnityEngine.Debug.Log("PARENTDIRPATH:");
         // UnityEngine.Debug.Log(PARENTDIRPATH);
-        EXEFILE_PATH = Path.Combine(CURRDIRPATH, "dist/predict_continuous/predict_continuous"); // FOR VR
+        EXEFILE_PATH = Path.Combine(CURRDIRPATH, "dist/predict_continuous/predict_continuous"); // FOR VR 
         // EXEFILE_PATH = CURRDIRPATH + "/Assets/Python/dist/predict_continuous/predict_continuous"; // FOR PC
         UnityEngine.Debug.Log("EXEFILE_PATH:");
         UnityEngine.Debug.Log(EXEFILE_PATH);
