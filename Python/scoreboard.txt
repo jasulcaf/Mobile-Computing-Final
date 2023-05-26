@@ -1,0 +1,98 @@
+Training latency for HGBC on headset for legs data: 5.202782869338989, inference latency: 0.09941
+Training latency for RFC on headset for legs data: 7.084579229354858, inference latency: 0.11119
+Precision score for HGBC on headset for legs data: 1.0
+Precision score for RFC on headset for legs data: 1.0
+Validation set accuracy score using HGBC on headset for legs data: 1.0
+Validation set accuracy score using RFC on headset for legs data: 1.0
+ 
+Training latency for HGBC on headset for hand_leg data: 13.515615224838257, inference latency: 0.54879
+Training latency for RFC on headset for hand_leg data: 33.975001096725464, inference latency: 0.34543
+Precision score for HGBC on headset for hand_leg data: 0.9999032699702646
+Precision score for RFC on headset for hand_leg data: 1.0
+Validation set accuracy score using HGBC on headset for hand-leg data: 0.9999032273673005
+Validation set accuracy score using RFC on headset for hand-leg data: 1.0
+ 
+Training latency for HGBC on left_cont for legs data: 7.659992218017578, inference latency: 0.11772
+Training latency for RFC on left_cont for legs data: 7.920175075531006, inference latency: 0.11333
+Precision score for HGBC on left_cont for legs data: 0.9998507518594563
+Precision score for RFC on left_cont for legs data: 0.9994025392083644
+Validation set accuracy score using HGBC on left_cont for legs data: 0.9998506348020911
+Validation set accuracy score using RFC on left_cont for legs data: 0.9994025392083644
+ 
+Training latency for HGBC on left_cont for hand_leg data: 20.5514919757843, inference latency: 0.47829
+Training latency for RFC on left_cont for hand_leg data: 27.974138736724854, inference latency: 0.35912
+Precision score for HGBC on left_cont for hand_leg data: 0.9945347571740659
+Precision score for RFC on left_cont for hand_leg data: 0.9962743293535041
+Validation set accuracy score using HGBC on left_cont for hand-leg data: 0.9945323462524798
+Validation set accuracy score using RFC on left_cont for hand-leg data: 0.9962742536410703
+ 
+Training latency for HGBC on right_cont for legs data: 5.793605089187622, inference latency: 0.09565
+Training latency for RFC on right_cont for legs data: 6.698929071426392, inference latency: 0.10652
+Precision score for HGBC on right_cont for legs data: 1.0
+Precision score for RFC on right_cont for legs data: 1.0
+Validation set accuracy score using HGBC on right_cont for legs data: 1.0
+Validation set accuracy score using RFC on right_cont for legs data: 1.0
+ 
+Training latency for HGBC on right_cont for hand_leg data: 12.842057943344116, inference latency: 0.47703
+Training latency for RFC on right_cont for hand_leg data: 28.5858371257782, inference latency: 0.36151
+Precision score for HGBC on right_cont for hand_leg data: 0.9999032687142916
+Precision score for RFC on right_cont for hand_leg data: 1.0
+Validation set accuracy score using HGBC on right_cont for hand-leg data: 0.9999032273673005
+Validation set accuracy score using RFC on right_cont for hand-leg data: 1.0
+ 
+Training latency for HGBC on headset_left_cont for legs data: 4.937386989593506, inference latency: 0.29491
+Training latency for RFC on headset_left_cont for legs data: 10.661411046981812, inference latency: 0.12961
+Precision score for HGBC on headset_left_cont for legs data: 1.0
+Precision score for RFC on headset_left_cont for legs data: 1.0
+Validation set accuracy score using HGBC on headset_left_cont for legs data: 1.0
+Validation set accuracy score using RFC on headset_left_cont for legs data: 1.0
+ 
+Training latency for HGBC on headset_left_cont for hand_leg data: 17.161869764328003, inference latency: 0.47518
+Training latency for RFC on headset_left_cont for hand_leg data: 41.605043172836304, inference latency: 0.31252
+Precision score for HGBC on headset_left_cont for hand_leg data: 1.0
+Precision score for RFC on headset_left_cont for hand_leg data: 1.0
+Validation set accuracy score using HGBC on headset_left_cont for hand-leg data: 1.0
+Validation set accuracy score using RFC on headset_left_cont for hand-leg data: 1.0
+ 
+Training latency for HGBC on headset_right_cont for legs data: 3.987589120864868, inference latency: 0.09332
+Training latency for RFC on headset_right_cont for legs data: 10.183858871459961, inference latency: 0.10148
+Precision score for HGBC on headset_right_cont for legs data: 1.0
+Precision score for RFC on headset_right_cont for legs data: 1.0
+Validation set accuracy score using HGBC on headset_right_cont for legs data: 1.0
+Validation set accuracy score using RFC on headset_right_cont for legs data: 1.0
+ 
+Training latency for HGBC on headset_right_cont for hand_leg data: 15.734054803848267, inference latency: 0.46737
+Training latency for RFC on headset_right_cont for hand_leg data: 43.24373698234558, inference latency: 0.32943
+Precision score for HGBC on headset_right_cont for hand_leg data: 1.0
+Precision score for RFC on headset_right_cont for hand_leg data: 1.0
+Validation set accuracy score using HGBC on headset_right_cont for hand-leg data: 1.0
+Validation set accuracy score using RFC on headset_right_cont for hand-leg data: 1.0
+ 
+Training latency for HGBC on left_cont_right_cont for legs data: 3.7051258087158203, inference latency: 0.10144
+Training latency for RFC on left_cont_right_cont for legs data: 10.315698862075806, inference latency: 0.09958
+Precision score for HGBC on left_cont_right_cont for legs data: 1.0
+Precision score for RFC on left_cont_right_cont for legs data: 1.0
+Validation set accuracy score using HGBC on left_cont_right_cont for legs data: 1.0
+Validation set accuracy score using RFC on left_cont_right_cont for legs data: 1.0
+ 
+Training latency for HGBC on left_cont_right_cont for hand_leg data: 14.444489002227783, inference latency: 0.49540
+Training latency for RFC on left_cont_right_cont for hand_leg data: 42.40757203102112, inference latency: 0.32508
+Precision score for HGBC on left_cont_right_cont for hand_leg data: 0.9999516573536109
+Precision score for RFC on left_cont_right_cont for hand_leg data: 1.0
+Validation set accuracy score using HGBC on left_cont_right_cont for hand-leg data: 0.9999516136836503
+Validation set accuracy score using RFC on left_cont_right_cont for hand-leg data: 1.0
+ 
+Training latency for HGBC on headset_left_cont_right_cont for legs data: 5.407594919204712, inference latency: 0.10255
+Training latency for RFC on headset_left_cont_right_cont for legs data: 10.75036907196045, inference latency: 0.10614
+Precision score for HGBC on headset_left_cont_right_cont for legs data: 1.0
+Precision score for RFC on headset_left_cont_right_cont for legs data: 1.0
+Validation set accuracy score using HGBC on headset_left_cont_right_cont for legs data: 1.0
+Validation set accuracy score using RFC on headset_left_cont_right_cont for legs data: 1.0
+ 
+Training latency for HGBC on headset_left_cont_right_cont for hand_leg data: 14.450366020202637, inference latency: 0.68009
+Training latency for RFC on headset_left_cont_right_cont for hand_leg data: 58.31773018836975, inference latency: 0.34591
+Precision score for HGBC on headset_left_cont_right_cont for hand_leg data: 1.0
+Precision score for RFC on headset_left_cont_right_cont for hand_leg data: 1.0
+Validation set accuracy score using HGBC on headset_left_cont_right_cont for hand-leg data: 1.0
+Validation set accuracy score using RFC on headset_left_cont_right_cont for hand-leg data: 1.0
+ 
