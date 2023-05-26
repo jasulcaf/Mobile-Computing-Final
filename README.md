@@ -8,7 +8,8 @@ Simply build like we did for Lab #1, #2, & #3.
 To run Python files:
 * For us to determine what Sensor combination is the best (for each Method we tested), we had to determnine the accuracy & latency for each. To run this code, simply run:```python3 shallow_weights_accuracy_latency.py``` while inside the ```Python``` folder. That will result in information being written to the file ```scoreboard.txt``` which is under the ```Python``` folder.
 * To run the model for a whole _testing_ folder, we run the following code ```python3 Python/predict_shallow.py --label_folder Data/Hand_Leg_Test --output output_labels.txt``` from the main directory. From terminal outputs, you will get the following information: Name of Testing file (which is the *correct* result), results for HGBC, and results for RFC. Note, an example output might be 
-    ```STDwLEGS
+    ```
+    STDwLEGS
     HGBC
     Counter({'STD': 395, 'ROL': 122, 'SITtoLAY': 66})
     ====
