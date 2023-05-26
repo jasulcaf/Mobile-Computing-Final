@@ -1,0 +1,195 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.uchicago.mobilecomputinglabs"
+4    android:installLocation="auto"
+5    android:versionCode="1"
+6    android:versionName="0.1" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="23"
+9-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml
+10        android:targetSdkVersion="30" />
+10-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml
+11
+12    <supports-screens
+12-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:3:3-163
+13        android:anyDensity="true"
+13-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:3:135-160
+14        android:largeScreens="true"
+14-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:3:78-105
+15        android:normalScreens="true"
+15-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:3:49-77
+16        android:smallScreens="true"
+16-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:3:21-48
+17        android:xlargeScreens="true" />
+17-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:3:106-134
+18
+19    <uses-feature android:glEsVersion="0x00030000" />
+19-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:13:5-54
+19-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:13:19-51
+20    <uses-feature
+20-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:14:5-16:36
+21        android:name="android.hardware.vulkan.version"
+21-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:15:9-55
+22        android:required="false" />
+22-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:16:9-33
+23
+24    <uses-permission android:name="android.permission.INTERNET" />
+24-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:18:5-67
+24-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:18:22-64
+25    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+25-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:19:5-79
+25-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:19:22-76
+26
+27    <uses-feature
+27-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:21:5-23:36
+28        android:name="android.hardware.touchscreen"
+28-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:22:9-52
+29        android:required="false" />
+29-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:23:9-33
+30    <uses-feature
+30-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:24:5-26:36
+31        android:name="android.hardware.touchscreen.multitouch"
+31-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:25:9-63
+32        android:required="false" />
+32-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:26:9-33
+33    <uses-feature
+33-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:27:5-29:36
+34        android:name="android.hardware.touchscreen.multitouch.distinct"
+34-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:28:9-72
+35        android:required="false" />
+35-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:29:9-33
+36    <uses-feature
+36-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:30:5-33:31
+37        android:name="android.hardware.vr.headtracking"
+37-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:31:9-56
+38        android:required="true"
+38-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:32:9-32
+39        android:version="1" />
+39-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:33:9-28
+40
+41    <application
+41-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:4:3-83
+42        android:allowBackup="false"
+42-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:36:9-36
+43        android:extractNativeLibs="true"
+43-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:37:9-41
+44        android:icon="@mipmap/app_icon"
+44-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:4:49-80
+45        android:label="@string/app_name"
+45-->/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/src/main/AndroidManifest.xml:4:16-48
+46        android:networkSecurityConfig="@xml/network_sec_config" >
+46-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:40:9-64
+47        <activity
+47-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:41:9-65:20
+48            android:name="com.unity3d.player.UnityPlayerActivity"
+48-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:42:13-66
+49            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|uiMode"
+49-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:43:13-114
+50            android:hardwareAccelerated="false"
+50-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:44:13-48
+51            android:launchMode="singleTask"
+51-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:45:13-44
+52            android:resizeableActivity="false"
+52-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:46:13-47
+53            android:screenOrientation="landscape"
+53-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:47:13-50
+54            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+54-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:48:13-77
+55            <intent-filter>
+55-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:49:13-54:29
+56                <action android:name="android.intent.action.MAIN" />
+56-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:50:17-69
+56-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:50:25-66
+57
+58                <category android:name="android.intent.category.LAUNCHER" />
+58-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:52:17-77
+58-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:52:27-74
+59                <category android:name="com.oculus.intent.category.VR" />
+59-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:53:17-74
+59-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:53:27-71
+60            </intent-filter>
+61
+62            <meta-data
+62-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:56:13-58:40
+63                android:name="unityplayer.UnityActivity"
+63-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:57:17-57
+64                android:value="true" />
+64-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:58:17-37
+65            <meta-data
+65-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:59:13-61:40
+66                android:name="android.notch_support"
+66-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:60:17-53
+67                android:value="true" />
+67-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:61:17-37
+68            <meta-data
+68-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:62:13-64:40
+69                android:name="com.oculus.vr.focusaware"
+69-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:63:17-56
+70                android:value="true" />
+70-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:64:17-37
+71        </activity>
+72
+73        <meta-data
+73-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:67:9-69:33
+74            android:name="unity.splash-mode"
+74-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:68:13-45
+75            android:value="0" />
+75-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:69:13-30
+76        <meta-data
+76-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:70:9-72:36
+77            android:name="unity.splash-enable"
+77-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:71:13-47
+78            android:value="True" />
+78-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:72:13-33
+79        <meta-data
+79-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:73:9-75:36
+80            android:name="unity.launch-fullscreen"
+80-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:74:13-51
+81            android:value="True" />
+81-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:75:13-33
+82        <meta-data
+82-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:76:9-78:37
+83            android:name="unity.allow-resizable-window"
+83-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:77:13-56
+84            android:value="False" />
+84-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:78:13-34
+85        <meta-data
+85-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:79:9-81:50
+86            android:name="notch.config"
+86-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:80:13-40
+87            android:value="portrait|landscape" />
+87-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:81:13-47
+88        <meta-data
+88-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:82:9-84:39
+89            android:name="com.samsung.android.vr.application.mode"
+89-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:83:13-67
+90            android:value="vr_only" />
+90-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:84:13-36
+91        <meta-data
+91-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:85:9-87:37
+92            android:name="com.unity.xr.oculus.LowOverheadMode"
+92-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:86:13-63
+93            android:value="false" />
+93-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:87:13-34
+94        <meta-data
+94-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:88:9-90:37
+95            android:name="com.unity.xr.oculus.LateLatching"
+95-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:89:13-60
+96            android:value="false" />
+96-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:90:13-34
+97        <meta-data
+97-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:91:9-93:37
+98            android:name="com.unity.xr.oculus.LateLatchingDebug"
+98-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:92:13-65
+99            android:value="false" />
+99-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:93:13-34
+100        <meta-data
+100-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:94:9-96:44
+101            android:name="com.oculus.supportedDevices"
+101-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:95:13-55
+102            android:value="quest|quest2" />
+102-->[:unityLibrary] /Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/library_manifest/release/AndroidManifest.xml:96:13-41
+103    </application>
+104
+105</manifest>

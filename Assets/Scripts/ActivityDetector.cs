@@ -23,14 +23,16 @@ public class ActivityDetector : MonoBehaviour
     // Light vars
     private readonly double LIGHT_OFF_THRESHOLD = .05;
     private readonly double LIGHT_ON_THRESHOLD = .75;
-    private readonly double LIGHT_OFF_DECAY = .95;
-    private readonly double LIGHT_ON_GROWTH = 1.05;
+    private readonly double LIGHT_OFF_DECAY = .975;
+    private readonly double LIGHT_ON_GROWTH = 1.25;
     // recording vars
-    private readonly int WINDOW_LENGTH = 10; // 6 seconds of data
-    private readonly int WINDOW_SLIDE = 5; // call model every 3 seconds
+    private readonly int WINDOW_LENGTH = 4; // 6 seconds of data
+    private readonly int WINDOW_SLIDE = 1; // call model every 3 seconds
     private bool readyToDetect = false;
     private float timeRemaining = 0;
     private bool timerActive = false;
+    private float timeRemainingJR = 0;
+    private bool timerActiveJR = false;
     // other
     private string CURRDIRPATH = "";
     private string EXEFILE_PATH = "";
@@ -66,8 +68,8 @@ public class ActivityDetector : MonoBehaviour
         mut_CSV_PROC.WaitOne();
         mut_ATTR_LIST.WaitOne();
         UnityEngine.Debug.Log("Entered mutex");
-        string path =  Path.Combine(Application.persistentDataPath, "curr_data.csv"); // FOR VR HEADSET
-        // string path = CURRDIRPATH + "/Assets/Resources/curr_data_FAKE.csv"; // FOR PC
+        // string path =  Path.Combine(Application.persistentDataPath, "curr_data.csv"); // FOR VR HEADSET
+        string path = CURRDIRPATH + "/Assets/Resources/curr_data_FAKE.csv"; // FOR PC
         // Delete the file if exists
         if (File.Exists(path))
         {
@@ -136,24 +138,6 @@ public class ActivityDetector : MonoBehaviour
         }
         UnityEngine.Debug.Log("Done writing to csv");
         // we just saved the data. lets empty out the attributes list
-
-        // TEMP STUFF
-        // using (var sr = new StreamReader(path))
-        // {
-        //     prevActivity = sr.ReadToEnd();
-        // }
-        // // release mut bruh
-        // mut_CSV_PROC.ReleaseMutex();
-        // mut_ATTR_LIST.ReleaseMutex();
-        // mut_DET_ACT.WaitOne();
-        // // Activity_Sign.GetComponent<TextMesh>().text = e.Message; ==> CANT DO THIS BC UNITY BAD
-        // mut_DET_ACT.ReleaseMutex();
-        
-        // return;
-
-
-        // TEMP STUFF
-
         attributes_list.RemoveRange(0, Math.Max(WINDOW_SLIDE * NUM_HZ, attributes_list.Count));
         mut_ATTR_LIST.ReleaseMutex();
         // Call the python script xD
@@ -161,7 +145,7 @@ public class ActivityDetector : MonoBehaviour
         try{
             UnityEngine.Debug.Log("Starting python process!!");
             ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = Path.Combine(Application.persistentDataPath, "predict_continuous"); 
+            start.FileName = EXEFILE_PATH; 
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using(Process process = Process.Start(start))
@@ -201,6 +185,7 @@ public class ActivityDetector : MonoBehaviour
     }
     void GetCurrentActivity(Dictionary<string, Vector3> attributes)
     {
+        
         if (!readyToDetect)
         {
             if (attributes_list.Count > 0)
@@ -241,6 +226,7 @@ public class ActivityDetector : MonoBehaviour
             return;
             // return prevActivity;
         }
+        UnityEngine.Debug.Log("GetCurrentActivity");
         // Set these vars now so we dont have overlaps
         secTracker = 0;
         framesReceived ++;
@@ -254,15 +240,15 @@ public class ActivityDetector : MonoBehaviour
     void Start()
     {
         sensorReader = new OculusSensorReader();
-        CURRDIRPATH = Application.persistentDataPath; // FOR VR HEADSET
-        // CURRDIRPATH = Directory.GetCurrentDirectory(); // FOR PC ==> this is the path to the /Mobile-Computing-Final folder :)
+        // CURRDIRPATH = Application.persistentDataPath; // FOR VR HEADSET
+        CURRDIRPATH = Directory.GetCurrentDirectory(); // FOR PC ==> this is the path to the /Mobile-Computing-Final folder :)
         UnityEngine.Debug.Log("CURRDIRPATH:");
         UnityEngine.Debug.Log(CURRDIRPATH);
         // PARENTDIRPATH = Directory.GetParent(CURRDIRPATH).ToString();
         // UnityEngine.Debug.Log("PARENTDIRPATH:");
         // UnityEngine.Debug.Log(PARENTDIRPATH);
-        EXEFILE_PATH = Path.Combine(CURRDIRPATH, "dist/predict_continuous/predict_continuous"); // FOR VR 
-        // EXEFILE_PATH = CURRDIRPATH + "/Assets/Python/dist/predict_continuous/predict_continuous"; // FOR PC
+        // EXEFILE_PATH = Path.Combine(CURRDIRPATH, "dist/predict_continuous/predict_continuous"); // FOR VR 
+        EXEFILE_PATH = CURRDIRPATH + "Python/predict_continuous.py"; // FOR PC
         UnityEngine.Debug.Log("EXEFILE_PATH:");
         UnityEngine.Debug.Log(EXEFILE_PATH);
 
@@ -320,6 +306,7 @@ public class ActivityDetector : MonoBehaviour
     {
         sensorReader.RefreshTrackedDevices();
         bool aButtonPressed = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch);
+        bool bButtonPressed = OVRInput.GetDown(OVRInput.Button.Two, OVRInput.Controller.RTouch);
         bool frontRTriggerPressed = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
         bool frontLTriggerPressed = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
         bool xButtonPressed = OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch);
@@ -327,6 +314,7 @@ public class ActivityDetector : MonoBehaviour
         bool keyboardXPress = Input.GetKeyUp(KeyCode.X); 
         bool keyboardZPress = Input.GetKeyUp(KeyCode.Z);
         bool keyboardCPress = Input.GetKeyUp(KeyCode.C);
+        bool keyboardVPress = Input.GetKeyUp(KeyCode.V);
         Color currColor = wallColor.GetColor("_Color");
 
         // triggers
@@ -353,11 +341,12 @@ public class ActivityDetector : MonoBehaviour
             timerActive = true;
             timeRemaining = 60.0f;
         }
-        if (yButtonPressed) // alarm in 5 minutes
+        if (bButtonPressed | keyboardVPress) // jerryrigged alarm
         {
-            UnityEngine.Debug.Log("Alarm in 5 minutes");
-            timerActive = true;
-            timeRemaining = 300.0f;
+            alarm.PlayOneShot(clip);
+            UnityEngine.Debug.Log("Jerryrigged alarm");
+            timerActiveJR = true;
+            timeRemainingJR = 15.0f;
         }
         
         if (timerActive)
@@ -367,6 +356,16 @@ public class ActivityDetector : MonoBehaviour
             {
                 alarm.PlayOneShot(clip);
                 timerActive = false;
+            }
+        }
+
+        if (timerActiveJR)
+        {
+            timeRemainingJR -= Time.deltaTime;
+            if (timeRemainingJR < 0.0f)
+            {
+                alarm.PlayOneShot(clip);
+                timerActiveJR = false;
             }
         }
 

@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sensor Capture.unity
     guid: c249320cff740054f973da7f7e24bd1f
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Activity Detection.unity
+    guid: 961c4d652ae8a0846936f36808c8e058
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: a6d6c251eeea8c941946c58696d4162b, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e930c144514b51a48bf333248ae9e89d, type: 2}
