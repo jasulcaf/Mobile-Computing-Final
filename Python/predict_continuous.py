@@ -18,7 +18,7 @@ if __name__ == "__main__":
         # dir_path = Path("/storage/emulated/0/Android/data/com.uchicago.mobilecomputinglabs/files") # for VR 
         # parent_path = dir_path.parent.absolute()
 
-        csv_path = str(dir_path) + "/Resources/curr_data.csv" # on PC
+        csv_path = str(dir_path) + "/Assets/Resources/curr_data.csv" # on PC
         # csv_path = str(dir_path) + "/csv_data.csv" # on VR
     except Exception as e:
         print("issues with path stuff")

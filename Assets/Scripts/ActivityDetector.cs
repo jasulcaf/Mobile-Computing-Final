@@ -26,8 +26,8 @@ public class ActivityDetector : MonoBehaviour
     private readonly double LIGHT_OFF_DECAY = .975;
     private readonly double LIGHT_ON_GROWTH = 1.25;
     // recording vars
-    private readonly int WINDOW_LENGTH = 4; // 6 seconds of data
-    private readonly int WINDOW_SLIDE = 1; // call model every 3 seconds
+    private readonly int WINDOW_LENGTH = 6; // N seconds of data
+    private readonly int WINDOW_SLIDE = 5; // call model every X seconds
     private bool readyToDetect = false;
     private float timeRemaining = 0;
     private bool timerActive = false;
@@ -170,15 +170,15 @@ public class ActivityDetector : MonoBehaviour
             return;
         }
         // good to release this mut m8]
-        // mut_CSV_PROC.ReleaseMutex();
-        // UnityEngine.Debug.Log("Detected Activity:");
-        // UnityEngine.Debug.Log(detected_activity);
+        mut_CSV_PROC.ReleaseMutex();
+        UnityEngine.Debug.Log("Detected Activity:");
+        UnityEngine.Debug.Log(detected_activity);
 
-        // // We've got some cleaning up to do 
-        // // mutex to protect this stuff
-        // mut_DET_ACT.WaitOne();
-        // prevActivity = detected_activity;
-        // detected_list.Add(detected_activity);
+        // We've got some cleaning up to do 
+        // mutex to protect this stuff
+        mut_DET_ACT.WaitOne();
+        prevActivity = detected_activity;
+        detected_list.Add(detected_activity);
         // Activity_Sign.GetComponent<TextMesh>().text = detected_activity; ==> CANT DO THIS BC UNITY BAD
 
         // done w mutex
@@ -249,7 +249,7 @@ public class ActivityDetector : MonoBehaviour
         // UnityEngine.Debug.Log("PARENTDIRPATH:");
         // UnityEngine.Debug.Log(PARENTDIRPATH);
         // EXEFILE_PATH = Path.Combine(CURRDIRPATH, "dist/predict_continuous/predict_continuous"); // FOR VR 
-        EXEFILE_PATH = CURRDIRPATH + "/Python/dist/predict_continuous/predict_continuous.py"; // FOR PC
+        EXEFILE_PATH = CURRDIRPATH + "/Python/dist/predict_continuous/predict_continuous"; // FOR PC
         UnityEngine.Debug.Log("EXEFILE_PATH:");
         UnityEngine.Debug.Log(EXEFILE_PATH);
 
