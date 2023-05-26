@@ -159,7 +159,8 @@ public class ActivityDetector : MonoBehaviour
         }
         catch (Exception e)
         {
-            UnityEngine.Debug.Log("Failure in python process");
+            UnityEngine.Debug.Log("Failure in python process: ");
+            UnityEngine.Debug.Log(e.Message);
             prevActivity = "Failure in python process: " + e.Message;
             // release mut bruh
             mut_CSV_PROC.ReleaseMutex();
@@ -248,7 +249,7 @@ public class ActivityDetector : MonoBehaviour
         // UnityEngine.Debug.Log("PARENTDIRPATH:");
         // UnityEngine.Debug.Log(PARENTDIRPATH);
         // EXEFILE_PATH = Path.Combine(CURRDIRPATH, "dist/predict_continuous/predict_continuous"); // FOR VR 
-        EXEFILE_PATH = CURRDIRPATH + "Python/predict_continuous.py"; // FOR PC
+        EXEFILE_PATH = CURRDIRPATH + "/Python/dist/predict_continuous/predict_continuous.py"; // FOR PC
         UnityEngine.Debug.Log("EXEFILE_PATH:");
         UnityEngine.Debug.Log(EXEFILE_PATH);
 

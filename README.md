@@ -24,6 +24,11 @@ Note the following keyboard triggers:
 - `C` to play alarm once instantly
 - `Z` to disable alarm
 - `V` to play alarm instantly then play it again 15 seconds later
+### Further Setup (PC and VR)
+In order to run the Python script, we convert it to a .exe file. To do this,
+go to the Moible-Computing-Final/Python/ Directory, and run the following
+terminal command: `pyinstaller predict_continuous`. We would upload these files to 
+Github but cannot because of filesize limit.
 ## Current Workaround (VR)
 Because the model could not be run on the VR headset, the workaround for 
 proof-of-concept involves a simulated experience. Specifically:

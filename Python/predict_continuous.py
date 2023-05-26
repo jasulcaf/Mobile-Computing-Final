@@ -12,7 +12,9 @@ from pathlib import Path
 
 if __name__ == "__main__":
     try: # PATH STUFF
-        dir_path = os.path.dirname(os.path.realpath(__file__)).parent.absolute() #on PC
+        # FOR PC: THIS MUST BE SET MANUALLY BECAUSE get_dir() DOESNT WORK AFTER 
+        # PYINSTALLER CONVERTS TO .EXE
+        dir_path = "/Users/matthewbutera/Desktop/4thyr/Spring/MobileComputing/Mobile-Computing-Final" #on PC
         # dir_path = Path("/storage/emulated/0/Android/data/com.uchicago.mobilecomputinglabs/files") # for VR 
         # parent_path = dir_path.parent.absolute()
 
