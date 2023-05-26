@@ -17,4 +17,4 @@ To run Python files:
     Counter({'STD': 285, 'ROL': 159, 'SITtoLAY': 139})
     ====
     ```
-    From here we would be able to determine STD was the outputted result for both HGBC & RFC (since this is the most probable outcome). The names STDwLEGS simply refers to some variations
+    From here we would be able to determine STD was the outputted result for both HGBC & RFC (since this is the most probable outcome). The names STDwLEGS simply refers to some variations of STD, thus in this case, the model prediction is correct.
